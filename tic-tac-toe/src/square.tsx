@@ -7,12 +7,12 @@ const SquareButton = styled.button`
 
 type squareProps={
     value: string;
-    handleClick: () => void;
+    handleClick: (i:number) => void;
 }
 
 export default function Square ({value, handleClick}: squareProps){
-
+    var i:number;
     return (
-        <SquareButton onClick={handleClick}>{value}</SquareButton>
+        <SquareButton onClick={()=>handleClick(i)}>{value}</SquareButton>
     )
 }
