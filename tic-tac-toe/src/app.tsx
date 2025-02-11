@@ -29,9 +29,24 @@ export default function Board() {
             if(squares[a] && squares[a]===squares[b] && squares[a]===squares[c]){
                 return squares[a];
             }
+            
         }
         return "";
     };
+
+    //Função para ajudar na verificação de empate
+    function isBoardEmpty(squares: Array<string>): boolean {
+        let aux=0;
+        for (let i = 0; i<squares.length; i++){
+            if(squares[i]!=""){
+                aux++;
+            }
+        }
+        if (aux==9){
+            return true;
+        }
+        return false;
+    }
 
 
     function handleClick(i:number){
@@ -46,7 +61,7 @@ export default function Board() {
             nextSquares[i]="O";
         }
         setSquares(nextSquares);
-        
+
         //Garantindo a virada de turno
         setXIsNext(!xIsNext);
     };
@@ -55,12 +70,15 @@ export default function Board() {
     if (winner){
         status = "Winner: " + winner;
     }
-    else{
+    else if(!winner && !isBoardEmpty(squares)) {
         status = "Next player: " + (xIsNext? "x": "O");
+    }
+    else{
+        status = "Empate"
     }
     return (
         <>
-            <div>{status}</div>
+            <h1>{status}</h1>
             <BoardRow>
                 <Square handleClick={()=>handleClick(0)} value={squares[0]}/>
                 <Square handleClick={()=>handleClick(1)} value={squares[1]}/>
