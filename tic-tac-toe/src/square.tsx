@@ -5,6 +5,7 @@ const SquareButton = styled.button`
     height:33px;    
 `;
 
+//Por meio das props, o board pode enviar requisição para o componente square atualizar.
 type squareProps={
     value: string;
     handleClick: () => void;

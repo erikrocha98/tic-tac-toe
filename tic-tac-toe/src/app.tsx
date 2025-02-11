@@ -23,6 +23,7 @@ export default function Board() {
             [0, 4, 8],
             [2, 4, 6]
         ];
+        //Percorre todas as possíveis configurações de vitória para verificar se há 3 símbolos alinhados.
         for (let i = 0; i<lines.length; i++){
             const [a,b,c] = lines[i];
             if(squares[a] && squares[a]===squares[b] && squares[a]===squares[c]){
@@ -45,6 +46,8 @@ export default function Board() {
             nextSquares[i]="O";
         }
         setSquares(nextSquares);
+        
+        //Garantindo a virada de turno
         setXIsNext(!xIsNext);
     };
     const winner = calculateWinner(squares);
