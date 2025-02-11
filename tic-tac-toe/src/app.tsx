@@ -32,8 +32,9 @@ export default function Board() {
         return "";
     };
 
+
     function handleClick(i:number){
-        if (squares[i]){
+        if (squares[i] || calculateWinner(squares)){
             return;
         }
         const nextSquares = squares.slice();
@@ -46,8 +47,17 @@ export default function Board() {
         setSquares(nextSquares);
         setXIsNext(!xIsNext);
     };
+    const winner = calculateWinner(squares);
+    let status;
+    if (winner){
+        status = "Winner: " + winner;
+    }
+    else{
+        status = "Next player: " + (xIsNext? "x": "O");
+    }
     return (
         <>
+            <div>{status}</div>
             <BoardRow>
                 <Square handleClick={()=>handleClick(0)} value={squares[0]}/>
                 <Square handleClick={()=>handleClick(1)} value={squares[1]}/>
