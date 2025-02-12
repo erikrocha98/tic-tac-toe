@@ -8,10 +8,14 @@ const BoardRow = styled.div`
     display: flex;
 `
 
-export default function Board() {
-    const[xIsNext, setXIsNext]=useState<boolean>(true)
-    const[squares, setSquares] = useState<Array<string>>(Array(9).fill(""));
+type boardProps={
+    xIsNext: boolean;
+    squares: Array<string>;
+    onPlay: (nextSquares: string[])=>void
+}
 
+export default function Board({xIsNext, squares, onPlay}: boardProps) {
+    
     function calculateWinner(squares: Array<string>):string{
         const lines = [
             [0, 1, 2],
@@ -60,10 +64,7 @@ export default function Board() {
         else{
             nextSquares[i]="O";
         }
-        setSquares(nextSquares);
-
-        //Garantindo a virada de turno
-        setXIsNext(!xIsNext);
+        onPlay(nextSquares);
     };
     const winner = calculateWinner(squares);
     let status;
